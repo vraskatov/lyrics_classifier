@@ -1,0 +1,5 @@
+beautifulsoup4==4.11.1
+nltk==3.7
+requests==2.22.0
+scikit_learn==1.1.2
+tqdm==4.63.0
