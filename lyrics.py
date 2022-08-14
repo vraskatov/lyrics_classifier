@@ -20,6 +20,7 @@ print('For that it can scrape them from lyrics.com or analyze already locally ex
 
 time.sleep(5)
 
+# Create a folder lyrics next to lyrics.py if it doesn't exist.
 try:
     os.makedirs(f'lyrics/', exist_ok=False)
     print('\nThe folder "lyrics" has been automatically created for you next to this py file.')
@@ -31,6 +32,7 @@ try:
 except FileExistsError:
     pass
 
+# Scraping lyrics, if user needs data.
 answer = ''
 while answer not in ('yes', 'no'):
     print('\nWould you like to scrape some lyrics?')
@@ -52,42 +54,44 @@ while answer not in ('yes', 'no'):
                 break
             else:
                 print('Sorry, that was no valid input.')
-            # just one time, but with another loop ;)
 
-        # You need two bands to make this program work.
-        # Do you want to scrape another band?
-
-        # load_data()
     elif answer == 'no':
         print('\nOkay, let\'s get directly to your data then.')
-        # show folders (maybe for the other as well)
         break
-        # load_data()
     else:
         print('Sorry, that was not a valid answer.')
         print('If you\'re trying to quit the program, you should consider pressing Ctrl+C.')
 
 print('Do you want to have a look at the subfolders of the folder "lyrics"?')
 time.sleep(2.4)
+
+# Folder_view shows folders with scraped data if user wishes so.
 folder_view()
 print('Going to the corpus builder.')
 time.sleep(2)
+
+# corpus_builder builds the two corpora from text files.
 corpus, labels = corpus_builder() # Can be also written as a function called inside a function
 corpus = nlp_pipeline(corpus)
 print('Done with NLP.')
 time.sleep(1)
 print('Splitting corpus in train and test an vectorizing words.')
+
+# Splitting in train and test.
 X_train, X_test, y_train, y_test = train_test_split(corpus, labels, random_state=12)
 
+# Vectorizing applies NLP techniques to corpora and vectorizes the words.
 X_train, X_test, vectorizer = vectorizing(X_train, X_test)
 time.sleep(1)
 print('\nNow it\'s time to build your model and predict some lyrics.')
 time.sleep(1)
 
+# Building the model and playing around with it.
 bayes_model = build_bayes(X_train, X_test, y_train, y_test, vectorizer)
 
 time.sleep(1)
 
+# Optional dumping of the model 
 model_save = ''
 while model_save not in ('yes', 'no'):
     model_save = input('\nWould you like to save that model? Enter yes or no:\n\n')
