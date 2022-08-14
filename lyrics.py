@@ -97,7 +97,7 @@ while model_save not in ('yes', 'no'):
         filename = f'{model_name}.sav'
         pickle.dump(bayes_model, open(filename, 'wb'))
         time.sleep(1.5)
-        print(f'\nYour model has been saved und the name {model_name}.sav '
+        print(f'\nYour model has been saved under the name {model_name}.sav '
               'next to this script.\n')
         time.sleep(2.4)
     elif model_save == 'no':
