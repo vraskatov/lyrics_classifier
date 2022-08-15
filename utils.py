@@ -20,7 +20,6 @@ from nltk.corpus import stopwords
 def get_songs():
     '''A function that gets songs by bandname from lyrics.com avoiding duplicates,
     cleans the filenames and removes files that are too small from the folders.'''
-    time.sleep(2.4)
 
     print('\nLet\'s scrape some lyrics then.')
     # Type in name of band
@@ -39,9 +38,7 @@ def get_songs():
     linkparts = re.findall(r'href="(\/lyric.+?)">', site)
 
     print(f'\nThe subsite of {band} has {len(linkparts)} links.')
-    time.sleep(2)
     print('Removing duplicates now.\n')
-    time.sleep(2)
 
     # Uniforming of links
     digits_pattern = r'\/lyric\/[0-9]{8}'
@@ -58,7 +55,7 @@ def get_songs():
     lyrics_part = []
     start_index = len(band_rep)+17
     for lyric in reduced:
-        if lyric[start_index:(start_index+5)] not in parts:
+        if lyric[start_index:(start_index+10)] not in parts:
             lyrics_part.append(lyric)
             parts.append(lyric[27:32])
     # Backward remove
@@ -72,7 +69,6 @@ def get_songs():
     links = []
     for link in lyrics:
         links.append('https://www.lyrics.com' + link)
-    time.sleep(2)
     if len(lyrics) > 10:
         print(f'Downloading {len(lyrics)} lyrics of {band}:\n')
         band_link = band.replace(' ', '+')
@@ -108,7 +104,6 @@ def get_songs():
                     print(name)
             except IndexError:
                 print(f'Could not download {name}')
-        time.sleep(2)
         print('\nRemoving files under 100 Bytes.')
 
         for entity in os.listdir(f'lyrics/{band_folder}'):
@@ -119,9 +114,7 @@ def get_songs():
                 print(f'Removed: "{file}" with a size of {size} bytes.')
     else:
         print('Sorry, the artist has under 10 songs, which is not enough.')
-        time.sleep(2)
         print('Please check the spelling of artist/band or try it with some other name.')
-        time.sleep(2)
 
 def folder_view():
     '''A function that offers the user to get an overview over the lyrics folder
@@ -131,7 +124,6 @@ def folder_view():
         view_wish = input('Please type in yes or no:\n\n')
         if view_wish == 'yes':
             print(f'\n{os.listdir("lyrics")}\n')
-            time.sleep(2.4)
             break
 
 def corpus_builder():
@@ -148,9 +140,7 @@ def corpus_builder():
         songs_one = len(os.listdir(subfolder_one))
         songs_two = len(os.listdir(subfolder_two))
         print(f'\n{band_one_name} has {songs_one} songs.')
-        time.sleep(1)
         print(f'{band_two_name} has {songs_two} songs.\n')
-        time.sleep(1)
         if abs(songs_one - songs_two) > 10:
             print('The difference between the song quantities is over 10.'
                   'Do you want to balance your dataset?')
@@ -291,7 +281,6 @@ def build_bayes(x_train, x_test, y_train, y_test, vectorizer):
     with lyrics of two different bands/artists.'''
     bayes_model = MultinomialNB()
     print('Fitting Naive Bayes model.\n')
-    time.sleep(2)
     bayes_model.fit(x_train, y_train)
     train_score = round(bayes_model.score(x_train, y_train)*100, 2)
     print(f'Naive Bayes model scores {train_score}% on train.')
