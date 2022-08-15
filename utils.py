@@ -57,7 +57,7 @@ def get_songs():
     for lyric in reduced:
         if lyric[start_index:(start_index+10)] not in parts:
             lyrics_part.append(lyric)
-            parts.append(lyric[27:32])
+            parts.append(lyric[start_index:(start_index+10)])
     # Backward remove
     parts = []
     lyrics = []
