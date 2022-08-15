@@ -75,7 +75,7 @@ corpus, labels = corpus_builder() # Can be also written as a function called ins
 corpus = nlp_pipeline(corpus)
 print('Done with NLP.')
 time.sleep(1)
-print('Splitting corpus in train and test an vectorizing words.')
+print('Splitting corpus in train and test and vectorizing words.')
 
 # Splitting in train and test.
 X_train, X_test, y_train, y_test = train_test_split(corpus, labels, random_state=12)

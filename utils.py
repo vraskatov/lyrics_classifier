@@ -56,8 +56,11 @@ def get_songs():
     # Forward remove
     parts = []
     lyrics_part = []
+    start_index = len(band_rep)+17
     for lyric in reduced:
-        if lyric[27:32] not in parts:
+        if lyric[start_index:(start_index+5)] not in parts:
+            print(lyric)
+            print(lyric[start_index:(start_index+5)])
             lyrics_part.append(lyric)
             parts.append(lyric[27:32])
     # Backward remove
@@ -137,7 +140,7 @@ def corpus_builder():
     '''A function that will turn the data from two given folders
     into a list of tuples containing lyrics and artist names.'''
     band_one = input('\nPlease type in subfolder one for the classifier:\n')
-    band_two = input('\nPlease type in subfolder one for the classifier:\n')
+    band_two = input('\nPlease type in subfolder two for the classifier:\n')
     band_one_name = band_one.replace('_', ' ')
     band_two_name = band_two.replace('_', ' ')
     subfolder_one = f'lyrics/{band_one}'
