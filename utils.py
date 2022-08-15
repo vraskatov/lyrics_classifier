@@ -59,8 +59,6 @@ def get_songs():
     start_index = len(band_rep)+17
     for lyric in reduced:
         if lyric[start_index:(start_index+5)] not in parts:
-            print(lyric)
-            print(lyric[start_index:(start_index+5)])
             lyrics_part.append(lyric)
             parts.append(lyric[27:32])
     # Backward remove
